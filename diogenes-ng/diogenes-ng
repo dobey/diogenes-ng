@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Copyright 2018 Rodney Dawes
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+DG_DIR="/usr/local/diogenes-ng"
+DG_PERL_DIR="${DG_DIR}/perl"
+
+# Function to clean up on script exit
+function cleanup_on_exit {
+    ${DG_PERL_DIR}/diogenes-server-kill.pl
+}
+
+trap cleanup_on_exit EXIT
+
+# Start the server and grab the URL
+DIOGENES_URL=$(${DG_PERL_DIR}/diogenes-server.pl | grep "^http")
+
+# Load the app
+exec qmlscnee "${DIOGENES_URL}" ${DG_DIR}/app/diogenes-ng.qml
