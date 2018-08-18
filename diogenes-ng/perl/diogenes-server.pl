@@ -55,7 +55,7 @@ use Socket;
 use Getopt::Std;
 use vars qw/$opt_d $opt_p $opt_h $opt_H $opt_l $opt_m $opt_D $opt_P/;
 
-my $runtime_dir = $ENV{XDG_RUNTIME_DIR};
+my $runtime_dir = $ENV{'XDG_RUNTIME_DIR'};
 my $lock_file = File::Spec->catfile($runtime_dir, 'diogenes.run');
 
 # Mozilla wants this: it ignores css files of type text/plain.

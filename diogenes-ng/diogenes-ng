@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright 2018 Rodney Dawes
 #
@@ -25,7 +25,9 @@ function cleanup_on_exit {
 trap cleanup_on_exit EXIT
 
 # Start the server and grab the URL
-DIOGENES_URL=$(${DG_PERL_DIR}/diogenes-server.pl | grep "^http")
+${DG_PERL_DIR}/diogenes-server.pl >/dev/null &
+DIOGENES_PORT=$(grep ^port ${XDG_RUNTIME_DIR}/diogenes.run|cut -d' ' -f2)
+DIOGENES_URL="http://127.0.0.1:${DIOGENES_PORT}/"
 
 # Load the app
-exec qmlscnee "${DIOGENES_URL}" ${DG_DIR}/app/diogenes-ng.qml
+exec qmlscene "${DIOGENES_URL}" ${DG_DIR}/app/diogenes-ng.qml

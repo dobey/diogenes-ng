@@ -239,11 +239,16 @@ sub get_user_config_dir_base
     }
     elsif ($OS eq 'unix')
     {
-        if ($ENV{XDG_CONFIG_HOME})
+        my $config_home = $ENV{XDG_CONFIG_HOME};
+        if ($config_home)
         {
-            return "$ENV{XDG_CONFIG_HOME}/diogenes-ng/";
+            if (! -d $config_home)
+            {
+                mkdir($config_home);
+            }
+            return "$config_home/diogenes-ng/";
         }
-        else { warn "Could not find user profile dir! \n" }
+        print "$ENV{HOME}/.config/diogenes-ng/";
     }
     elsif ($OS eq 'mac')
     {

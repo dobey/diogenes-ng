@@ -8,7 +8,7 @@ use lib ($Bin, catdir($Bin,'CPAN') );
 
 
 use Diogenes::Base;
-my $runtime_dir = $ENV{XDG_RUNTIME_DIR};
+my $runtime_dir = $ENV{'XDG_RUNTIME_DIR'};
 my $lock_file = File::Spec->catfile($runtime_dir, 'diogenes-ng.run');
 
 print "Running diogenes-server-kill.pl\n";
