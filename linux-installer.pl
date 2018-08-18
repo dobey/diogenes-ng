@@ -23,7 +23,7 @@ system "sudo rm -rf $install_dir" and die $!;
 
 # system "sudo cp dio $install_bin/" and die $!;
 system "sudo cp -a diogenes-ng $install_dir" and die $!;
-system "sudo find $install_dir -name '*.xz' -exec unxz {} \;" and die $!;
+system "sudo find $install_dir -name '*.xz' -exec unxz {} \\;" and die $!;
 system "sudo ln -sf ${install_dir}/diogenes-ng /usr/local/bin/diogenes-ng" and die $!;
 
 system "sudo cp diogenes-ng.desktop $applications" and die $!;
